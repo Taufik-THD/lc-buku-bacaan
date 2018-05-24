@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <img src="http://bdfjade.com/data/out/105/6092109-book-wallpaper.jpg" alt="" style="position: flex;">
+    <img src="" alt="" style="position: flex;">
     <!-- modal -->
         <div id="modal2" class="modal">
           <div class="container-modal white z-depth-2">
@@ -275,7 +275,7 @@ export default {
         this.penerbit = ''
         this.penulis = ''
         this.image = ''
-        this.location.reload()
+        window.location.reload()
       })
       .catch(err => {
         console.log(err);

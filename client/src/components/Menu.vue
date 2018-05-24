@@ -2,14 +2,19 @@
   <div class="container">
 
     <div class="row">
-      <div class="col s12 m3">
+      <div class="col s12 m3" v-for='item in books'>
         <div class="card teal darken-4">
           <div class="card-image">
-            <img style="height:200px">
+            <img :src="item.picture" style="height:200px">
           </div>
           <div class="card-content">
-            <h5 style="color: white"></h5>
-            <p style="color: white"></p>
+            <p style="color: white">Karya :{{ item.penulis }}</p>
+            <hr>
+            <router-link :to="{name: 'about', params: {id: item._id}}">
+              <span class="card-title" @click='openBook(item._id)'> <a style="cursor:pointer;" >{{ item.judul }}</a> </span>
+            </router-link>
+            <hr>
+            <h6 style="color: white">Penerbit:  {{ item.penerbit }}</h6>
           </div>
         </div>
       </div>
@@ -32,22 +37,24 @@ export default {
       judul: '',
       penerbit: '',
       penulis: '',
-      gambar: ''
+      gambar: '',
+      books: null
     }
   },
   name: 'Homepage',
   methods: {
     getItem(){
-      // axios({
-      //   method: 'get',
-      //   url: 'http://localhost:3000/'
-      // })
-      // .then(data => {
-      //   this.items = data.data.data
-      // })
-      // .catch(err => {
-      //   console.log(err);
-      // })
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/'
+      })
+      .then(data => {
+        this.books = data.data
+        console.log(this.books);
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
 
     checktoken(){
@@ -56,6 +63,17 @@ export default {
       } else {
         return true
       }
+    },
+
+    openBook(bookId){
+
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/openbook/${bookId}`
+      }).then((data) => {
+        console.log(data.data[0]);
+      })
+
     }
 
   }
