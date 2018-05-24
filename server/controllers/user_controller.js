@@ -72,7 +72,7 @@ module.exports = {
       } else {
         res.status(201).json('success add user');
       }
-      })
+    })
 
 
   }
